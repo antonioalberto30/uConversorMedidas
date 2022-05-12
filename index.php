@@ -1,11 +1,26 @@
 <?php
 $mostrar = false;
-$tmpC = 0.0;
-if( isset( $_POST["tempF"] ) ) {
-$tmpF = floatval($_POST["tempF"]);
-$tmpC = ($tmpF - 32) * (5 / 9);
-$mostrar = true;
+$tmpF = 0.0;
+
+if ($opcao == "F"){
+
+ if( isset( $_POST["temp"] ) ) {
+    //Fahrenheit to Celsius ° C = 5/9 (° F - 32)
+ $tmpI = floatval($_POST["temp"]);
+ $tmpF = ($tmpF - 32) * (5 / 9);
+ $mostrar = true;
 }
+
+}else  if ($opcao == "C"){
+
+ if( isset( $_POST["temp"] ) ) {
+ //Celsius to Fahrenheit ° F = 9/5 ( ° C) + 32
+ $tmpI = floatval($_POST["temp"]);
+ $tmpF = ($tmpF + 32) * (5 / 9);
+ $mostrar = true;
+}
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,17 +34,29 @@ content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=
 <body>
 <form></form>
 <form method="post">
-<label for="tempF" >Temperatura</label>
-<input type="number" name="tempF" required>
+<label for="temp" >Temperatura</label>
+<input type="number" name="temp" required>
+
+
 <select name="opcao">
 <option value="F">Fahrenheit</option>
 <option value="C">Celsius</option>
+
+
 </select>
 <input type="submit" value="Converter">
 </form>
 <?php if($mostrar) {?>
 <h1>Resultado da conversão:</h1>
-<p><?php echo $tmpC ?> ºC</p>
+<p><?php echo $tmpF ?> ºC</p>
 <?php } ?>
 </body>
 </html>
+
+
+//Celsius to Fahrenheit ° F = 9/5 ( ° C) + 32
+//Fahrenheit to Celsius ° C = 5/9 (° F - 32)
+//Celsius to Kelvin K = ° C + 273.15
+//Kelvin to Celsius ° C = K - 273.15
+//Fahrenheit to Kelvin K = 5/9 (° F - 32) + 273.15
+//Kelvin to Fahrenheit 	° F = 9/5 (K - 273.15) + 32
